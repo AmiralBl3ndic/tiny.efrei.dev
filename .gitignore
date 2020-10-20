@@ -1,0 +1,9 @@
+.vscode/
+.idea/
+
+dist/
+build/
+target/
+out/
+
+node_modules
