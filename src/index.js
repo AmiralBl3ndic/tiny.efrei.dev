@@ -99,7 +99,6 @@ app.all('/url/:slug', async (req, res) => {
         _self: {
           method: req.method,
           url: req.url,
-          path: req.path,
         },
         registerURL: {
           method: 'POST',
