@@ -36,6 +36,64 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.json({
     message: 'A simple URL reducer',
+    _links: {
+      _self: {
+        method: 'GET',
+        url: '/',
+        response: {
+          body: {
+            message: {
+              type: 'string',
+              description: 'API welcome message',
+            },
+          },
+        },
+      },
+      index: {
+        method: 'GET',
+        url: '/',
+        response: {
+          body: {
+            message: {
+              type: 'string',
+              description: 'API welcome message',
+            },
+          },
+        },
+      },
+      registerURL: {
+        method: 'POST',
+        url: '/url',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: {
+          url: {
+            type: 'string',
+            required: true,
+          },
+        },
+        response: {
+          body: {
+            url: {
+              type: 'string',
+              description: 'URL that was registered',
+            },
+            short: {
+              type: 'string',
+              description: 'URL that will redirect to the provided URL',
+            },
+            slug: {
+              type: 'string',
+              description: 'Unique identifier of the registered URL',
+            },
+          },
+        },
+      },
+      redirect: {
+        path: '/url/:slug',
+      },
+    },
   });
 });
 
@@ -49,10 +107,72 @@ app.post('/url', async (req, res) => {
         _self: {
           method: 'POST',
           url: '/url',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: {
+            url: {
+              type: 'string',
+              required: true,
+            },
+          },
+          response: {
+            body: {
+              url: {
+                type: 'string',
+                description: 'URL that was registered',
+              },
+              short: {
+                type: 'string',
+                description: 'URL that will redirect to the provided URL',
+              },
+              slug: {
+                type: 'string',
+                description: 'Unique identifier of the registered URL',
+              },
+            },
+          },
+        },
+        index: {
+          method: 'GET',
+          url: '/',
+          response: {
+            body: {
+              message: {
+                type: 'string',
+                description: 'API welcome message',
+              },
+            },
+          },
         },
         registerURL: {
           method: 'POST',
           url: '/url',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: {
+            url: {
+              type: 'string',
+              required: true,
+            },
+          },
+          response: {
+            body: {
+              url: {
+                type: 'string',
+                description: 'URL that was registered',
+              },
+              short: {
+                type: 'string',
+                description: 'URL that will redirect to the provided URL',
+              },
+              slug: {
+                type: 'string',
+                description: 'Unique identifier of the registered URL',
+              },
+            },
+          },
         },
         redirect: {
           path: '/url/:slug',
@@ -76,10 +196,72 @@ app.post('/url', async (req, res) => {
       _self: {
         method: 'POST',
         url: '/url',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: {
+          url: {
+            type: 'string',
+            required: true,
+          },
+        },
+        response: {
+          body: {
+            url: {
+              type: 'string',
+              description: 'URL that was registered',
+            },
+            short: {
+              type: 'string',
+              description: 'URL that will redirect to the provided URL',
+            },
+            slug: {
+              type: 'string',
+              description: 'Unique identifier of the registered URL',
+            },
+          },
+        },
+      },
+      index: {
+        method: 'GET',
+        url: '/',
+        response: {
+          body: {
+            message: {
+              type: 'string',
+              description: 'API welcome message',
+            },
+          },
+        },
       },
       registerURL: {
         method: 'POST',
         url: '/url',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: {
+          url: {
+            type: 'string',
+            required: true,
+          },
+        },
+        response: {
+          body: {
+            url: {
+              type: 'string',
+              description: 'URL that was registered',
+            },
+            short: {
+              type: 'string',
+              description: 'URL that will redirect to the provided URL',
+            },
+            slug: {
+              type: 'string',
+              description: 'Unique identifier of the registered URL',
+            },
+          },
+        },
       },
       redirect: {
         path: '/url/:slug',
@@ -100,9 +282,46 @@ app.all('/url/:slug', async (req, res) => {
           method: req.method,
           url: req.url,
         },
+        index: {
+          method: 'GET',
+          url: '/',
+          response: {
+            body: {
+              message: {
+                type: 'string',
+                description: 'API welcome message',
+              },
+            },
+          },
+        },
         registerURL: {
           method: 'POST',
           url: '/url',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: {
+            url: {
+              type: 'string',
+              required: true,
+            },
+          },
+          response: {
+            body: {
+              url: {
+                type: 'string',
+                description: 'URL that was registered',
+              },
+              short: {
+                type: 'string',
+                description: 'URL that will redirect to the provided URL',
+              },
+              slug: {
+                type: 'string',
+                description: 'Unique identifier of the registered URL',
+              },
+            },
+          },
         },
         redirect: {
           path: '/url/:slug',
@@ -112,6 +331,70 @@ app.all('/url/:slug', async (req, res) => {
   }
 
   res.redirect(url);
+});
+
+app.use((req, res, next) => {
+  return res.status(StatusCodes.NOT_FOUND).json({
+    error: true,
+    message: `Unable to resolve path ${req.path}`,
+    _links: {
+      _self: {
+        method: req.method,
+        url: req.url,
+      },
+      index: {
+        method: 'GET',
+        url: '/',
+        response: {
+          body: {
+            message: {
+              type: 'string',
+              description: 'API welcome message',
+            },
+          },
+        },
+      },
+      registerURL: {
+        method: 'POST',
+        url: '/url',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: {
+          url: {
+            type: 'string',
+            required: true,
+          },
+        },
+        response: {
+          body: {
+            url: {
+              type: 'string',
+              description: 'URL that was registered',
+            },
+            short: {
+              type: 'string',
+              description: 'URL that will redirect to the provided URL',
+            },
+            slug: {
+              type: 'string',
+              description: 'Unique identifier of the registered URL',
+            },
+          },
+        },
+      },
+      redirect: {
+        path: '/url/:slug',
+        pahtParams: {
+          slug: {
+            type: 'string',
+            required: true,
+            description: 'The slug of the URL to redirect to',
+          },
+        },
+      },
+    },
+  });
 });
 
 app.listen(process.env.PORT || 8080, () => {
