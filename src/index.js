@@ -40,6 +40,7 @@ app.get('/', (req, res) => {
       _self: {
         method: 'GET',
         url: '/',
+        path: '/',
         response: {
           body: {
             message: {
@@ -51,7 +52,7 @@ app.get('/', (req, res) => {
       },
       index: {
         method: 'GET',
-        url: '/',
+        path: '/',
         response: {
           body: {
             message: {
@@ -63,7 +64,7 @@ app.get('/', (req, res) => {
       },
       registerURL: {
         method: 'POST',
-        url: '/url',
+        path: '/url',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -114,6 +115,7 @@ app.post('/url', async (req, res) => {
         _self: {
           method: 'POST',
           url: '/url',
+          path: '/url',
           headers: {
             'Content-Type': 'application/json',
           },
@@ -142,7 +144,7 @@ app.post('/url', async (req, res) => {
         },
         index: {
           method: 'GET',
-          url: '/',
+          path: '/',
           response: {
             body: {
               message: {
@@ -154,7 +156,7 @@ app.post('/url', async (req, res) => {
         },
         registerURL: {
           method: 'POST',
-          url: '/url',
+          path: '/url',
           headers: {
             'Content-Type': 'application/json',
           },
@@ -210,6 +212,7 @@ app.post('/url', async (req, res) => {
       _self: {
         method: 'POST',
         url: '/url',
+        path: '/url',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -238,7 +241,7 @@ app.post('/url', async (req, res) => {
       },
       index: {
         method: 'GET',
-        url: '/',
+        path: '/',
         response: {
           body: {
             message: {
@@ -250,7 +253,7 @@ app.post('/url', async (req, res) => {
       },
       registerURL: {
         method: 'POST',
-        url: '/url',
+        path: '/url',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -313,7 +316,7 @@ app.all('/url/:slug', async (req, res) => {
         },
         index: {
           method: 'GET',
-          url: '/',
+          path: '/',
           response: {
             body: {
               message: {
@@ -325,7 +328,7 @@ app.all('/url/:slug', async (req, res) => {
         },
         registerURL: {
           method: 'POST',
-          url: '/url',
+          path: '/url',
           headers: {
             'Content-Type': 'application/json',
           },
@@ -380,7 +383,7 @@ app.use((req, res, next) => {
       },
       index: {
         method: 'GET',
-        url: '/',
+        path: '/',
         response: {
           body: {
             message: {
@@ -392,7 +395,7 @@ app.use((req, res, next) => {
       },
       registerURL: {
         method: 'POST',
-        url: '/url',
+        path: '/url',
         headers: {
           'Content-Type': 'application/json',
         },
