@@ -1,3 +1,4 @@
+const path = require('path');
 const { promisify } = require('util');
 const dotenv = require('dotenv');
 const redis = require('redis');
@@ -33,28 +34,7 @@ app.use(helmet());
 app.use(cors());
 app.use(morgan('tiny'));
 app.use(express.json());
-
-app.get('/', (req, res) => {
-  res.json({
-    message: 'A simple URL reducer',
-    _links: {
-      _self: {
-        method: 'GET',
-        url: '/',
-        path: '/',
-        response: {
-          body: {
-            message: {
-              type: 'string',
-              description: 'API welcome message',
-            },
-          },
-        },
-      },
-      ...baseHATEOASLinks._links,
-    },
-  });
-});
+app.use(express.static(path.resolve(__dirname, '..', 'static')));
 
 app.post('/url', async (req, res) => {
   try {

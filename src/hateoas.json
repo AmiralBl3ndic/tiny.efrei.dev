@@ -1,17 +1,5 @@
 {
   "_links": {
-    "index": {
-      "method": "GET",
-      "path": "/",
-      "response": {
-        "body": {
-          "message": {
-            "type": "string",
-            "description": "API welcome message"
-          }
-        }
-      }
-    },
     "registerURL": {
       "method": "POST",
       "path": "/url",
