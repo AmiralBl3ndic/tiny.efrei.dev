@@ -8,6 +8,7 @@ const cors = require('cors');
 const { StatusCodes } = require('http-status-codes');
 const { nanoid } = require('nanoid');
 
+const baseHATEOASLinks = require('./hateoas.json');
 const urlRegistrationYupModel = require('./model/url-register-request.yup');
 
 dotenv.config();
@@ -50,57 +51,7 @@ app.get('/', (req, res) => {
           },
         },
       },
-      index: {
-        method: 'GET',
-        path: '/',
-        response: {
-          body: {
-            message: {
-              type: 'string',
-              description: 'API welcome message',
-            },
-          },
-        },
-      },
-      registerURL: {
-        method: 'POST',
-        path: '/url',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: {
-          url: {
-            type: 'string',
-            required: true,
-          },
-        },
-        response: {
-          body: {
-            url: {
-              type: 'string',
-              description: 'URL that was registered',
-            },
-            short: {
-              type: 'string',
-              description: 'URL that will redirect to the provided URL',
-            },
-            slug: {
-              type: 'string',
-              description: 'Unique identifier of the registered URL',
-            },
-          },
-        },
-      },
-      redirect: {
-        path: '/url/:slug',
-        pathParams: {
-          slug: {
-            type: 'string',
-            required: true,
-            description: 'The slug of the URL to redirect to',
-          },
-        },
-      },
+      ...baseHATEOASLinks._links,
     },
   });
 });
@@ -142,57 +93,7 @@ app.post('/url', async (req, res) => {
             },
           },
         },
-        index: {
-          method: 'GET',
-          path: '/',
-          response: {
-            body: {
-              message: {
-                type: 'string',
-                description: 'API welcome message',
-              },
-            },
-          },
-        },
-        registerURL: {
-          method: 'POST',
-          path: '/url',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: {
-            url: {
-              type: 'string',
-              required: true,
-            },
-          },
-          response: {
-            body: {
-              url: {
-                type: 'string',
-                description: 'URL that was registered',
-              },
-              short: {
-                type: 'string',
-                description: 'URL that will redirect to the provided URL',
-              },
-              slug: {
-                type: 'string',
-                description: 'Unique identifier of the registered URL',
-              },
-            },
-          },
-        },
-        redirect: {
-          path: '/url/:slug',
-          pathParams: {
-            slug: {
-              type: 'string',
-              required: true,
-              description: 'The slug of the URL to redirect to',
-            },
-          },
-        },
+        ...baseHATEOASLinks._links,
       },
     });
   }
@@ -239,57 +140,7 @@ app.post('/url', async (req, res) => {
           },
         },
       },
-      index: {
-        method: 'GET',
-        path: '/',
-        response: {
-          body: {
-            message: {
-              type: 'string',
-              description: 'API welcome message',
-            },
-          },
-        },
-      },
-      registerURL: {
-        method: 'POST',
-        path: '/url',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: {
-          url: {
-            type: 'string',
-            required: true,
-          },
-        },
-        response: {
-          body: {
-            url: {
-              type: 'string',
-              description: 'URL that was registered',
-            },
-            short: {
-              type: 'string',
-              description: 'URL that will redirect to the provided URL',
-            },
-            slug: {
-              type: 'string',
-              description: 'Unique identifier of the registered URL',
-            },
-          },
-        },
-      },
-      redirect: {
-        path: '/url/:slug',
-        pathParams: {
-          slug: {
-            type: 'string',
-            required: true,
-            description: 'The slug of the URL to redirect to',
-          },
-        },
-      },
+      ...baseHATEOASLinks._links,
     },
   });
 });
@@ -314,57 +165,7 @@ app.all('/url/:slug', async (req, res) => {
             },
           },
         },
-        index: {
-          method: 'GET',
-          path: '/',
-          response: {
-            body: {
-              message: {
-                type: 'string',
-                description: 'API welcome message',
-              },
-            },
-          },
-        },
-        registerURL: {
-          method: 'POST',
-          path: '/url',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: {
-            url: {
-              type: 'string',
-              required: true,
-            },
-          },
-          response: {
-            body: {
-              url: {
-                type: 'string',
-                description: 'URL that was registered',
-              },
-              short: {
-                type: 'string',
-                description: 'URL that will redirect to the provided URL',
-              },
-              slug: {
-                type: 'string',
-                description: 'Unique identifier of the registered URL',
-              },
-            },
-          },
-        },
-        redirect: {
-          path: '/url/:slug',
-          pathParams: {
-            slug: {
-              type: 'string',
-              required: true,
-              description: 'The slug of the URL to redirect to',
-            },
-          },
-        },
+        ...baseHATEOASLinks._links,
       },
     });
   }
@@ -381,57 +182,7 @@ app.use((req, res, next) => {
         method: req.method,
         url: req.url,
       },
-      index: {
-        method: 'GET',
-        path: '/',
-        response: {
-          body: {
-            message: {
-              type: 'string',
-              description: 'API welcome message',
-            },
-          },
-        },
-      },
-      registerURL: {
-        method: 'POST',
-        path: '/url',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: {
-          url: {
-            type: 'string',
-            required: true,
-          },
-        },
-        response: {
-          body: {
-            url: {
-              type: 'string',
-              description: 'URL that was registered',
-            },
-            short: {
-              type: 'string',
-              description: 'URL that will redirect to the provided URL',
-            },
-            slug: {
-              type: 'string',
-              description: 'Unique identifier of the registered URL',
-            },
-          },
-        },
-      },
-      redirect: {
-        path: '/url/:slug',
-        pathParams: {
-          slug: {
-            type: 'string',
-            required: true,
-            description: 'The slug of the URL to redirect to',
-          },
-        },
-      },
+      ...baseHATEOASLinks._links,
     },
   });
 });
