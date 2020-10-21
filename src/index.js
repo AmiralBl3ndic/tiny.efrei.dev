@@ -92,6 +92,13 @@ app.get('/', (req, res) => {
       },
       redirect: {
         path: '/url/:slug',
+        pathParams: {
+          slug: {
+            type: 'string',
+            required: true,
+            description: 'The slug of the URL to redirect to',
+          },
+        },
       },
     },
   });
@@ -176,6 +183,13 @@ app.post('/url', async (req, res) => {
         },
         redirect: {
           path: '/url/:slug',
+          pathParams: {
+            slug: {
+              type: 'string',
+              required: true,
+              description: 'The slug of the URL to redirect to',
+            },
+          },
         },
       },
     });
@@ -265,6 +279,13 @@ app.post('/url', async (req, res) => {
       },
       redirect: {
         path: '/url/:slug',
+        pathParams: {
+          slug: {
+            type: 'string',
+            required: true,
+            description: 'The slug of the URL to redirect to',
+          },
+        },
       },
     },
   });
@@ -281,6 +302,14 @@ app.all('/url/:slug', async (req, res) => {
         _self: {
           method: req.method,
           url: req.url,
+          path: '/url/:slug',
+          pathParams: {
+            slug: {
+              type: 'string',
+              required: true,
+              description: 'The slug of the URL to redirect to',
+            },
+          },
         },
         index: {
           method: 'GET',
@@ -325,6 +354,13 @@ app.all('/url/:slug', async (req, res) => {
         },
         redirect: {
           path: '/url/:slug',
+          pathParams: {
+            slug: {
+              type: 'string',
+              required: true,
+              description: 'The slug of the URL to redirect to',
+            },
+          },
         },
       },
     });
@@ -385,7 +421,7 @@ app.use((req, res, next) => {
       },
       redirect: {
         path: '/url/:slug',
-        pahtParams: {
+        pathParams: {
           slug: {
             type: 'string',
             required: true,
