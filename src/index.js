@@ -41,10 +41,23 @@ app.get('/', (req, res) => {
 
 app.post('/url', async (req, res) => {
   try {
-    urlRegistrationYupModel.validate(req.body);
+    await urlRegistrationYupModel.validate(req.body);
   } catch (error) {
     return res.status(StatusCodes.CONFLICT).json({
       error,
+      _links: {
+        _self: {
+          method: 'POST',
+          url: '/url',
+        },
+        registerURL: {
+          method: 'POST',
+          url: '/url',
+        },
+        redirect: {
+          path: '/url/:slug',
+        },
+      },
     });
   }
 
@@ -56,8 +69,9 @@ app.post('/url', async (req, res) => {
   await store.set(slug, urlToRegister);
 
   res.status(StatusCodes.CREATED).json({
-    url: urlToRegister,
     slug,
+    url: urlToRegister,
+    short: `${req.protocol}://${req.hostname}/url/${slug}`,
     _links: {
       _self: {
         method: 'POST',
