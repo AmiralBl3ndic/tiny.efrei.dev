@@ -9,6 +9,7 @@ COPY package.json yarn.lock /app/
 
 RUN yarn
 
+COPY static/ /app/static/
 COPY src/ /app/src/
 
 CMD ["yarn", "start"]
